@@ -1,0 +1,42 @@
+Nazev,Popis
+ID,nahodne pridelene cislo vzorku – 1 – 36 (12 vzorku po 3 opakovanich)
+Jezero,Puda z povodi Plesneho (PL) nebo Certova (CT) jezera
+Plocha,"Cislo plochy, na ktere byl pudni vzorek odebran. Detailni informace o kazde plose ma Michal Choma (chomic@email.cz)"
+Horizont,"Pudni horizont – bud O (typicky smes diagnostickych horizontu1 Ol a Of), nebo A (diagnosticky horizont H)"
+Opakovani,Pro kazdy vzorek jsou vzdy 3 opakovani
+DW,suchy podil pudy – bezrozmerne
+TOC1,"0,5M K2SO4 extrahovatelný organický uhlík (v pomeru puda/extraktant ¼ g/ml) – stanoveno v srpnu 2022 [umol C/g DW]"
+MBC1,"Uhlik v biomase pudnich mikroorganismu stanoveny fumigacne extrakcni metodou podle Vance et al. 1987, pouzity korekcni faktor je 0.45 podle Wu et al. 1990 – stanoveno v srpnu 2022 [umol C/g DW]"
+TN1,"0,5M K2SO4 extrahovatelný dusik (v pomeru puda/extraktant ¼ g/ml) – stanoveno v srpnu 2022 [umol N/g DW]"
+MBN1,"Dusik v biomase pudnich mikroorganismu stanoveny fumigacne extrakcni metodou podle Brookes et al. 1985, pouzity korekcni faktor je 0.54 – stanoveno v srpnu 2022 [umol N/g DW]"
+Pi1,"0,5M NaHCO3 o pH = 8.5 extrahovatelný fosfor (v pomeru puda/extraktant 1/15 g/ml) – stanoveno v cervnu 2022 [umol P/g DW]"
+Ptot1,"0,5M NaHCO3 o pH = 8.5 extrahovatelný fosfor (v pomeru puda/extraktant 1/15 g/ml) – celkovy P v extraktu [umol P/g DW]"
+MBP1,"Fosfor v biomase pudnich mikroorganismu stanoveny fumigacne extrakcni metodou podle Brookes et al. 1982, pouzity korekcni faktor je 0.4 – stanoveno v cervnu 2022 [umol P/g DW]"
+TOC2,"0,5M K2SO4 extrahovatelný organický uhlík (v pomeru puda/extraktant ¼ g/ml) – stanoveno v listopadu 2022 [umol C/g DW]"
+MBC2,"Uhlik v biomase pudnich mikroorganismu stanoveny fumigacne extrakcni metodou podle Vance et al. 1987, pouzity korekcni faktor je 0.45 podle Wu et al. 1990 – stanoveno v listopadu 2022 [umol C/g DW]"
+TN2,"0,5M K2SO4 extrahovatelný dusik (v pomeru puda/extraktant ¼ g/ml) – stanoveno v listopadu 2022 [umol N/g DW]"
+MBN2,"Dusik v biomase pudnich mikroorganismu stanoveny fumigacne extrakcni metodou podle Brookes et al. 1985, pouzity korekcni faktor je 0.54 – stanoveno v listopadu 2022 [umol N/g DW]"
+Pi2,"0,5M NaHCO3 o pH = 8.5 extrahovatelný fosfor (v pomeru puda/extraktant 1/15 g/ml) – stanoveno v listopadu 2022 [umol P/g DW]"
+MBP2,"Fosfor v biomase pudnich mikroorganismu stanoveny fumigacne extrakcni metodou podle Brookes et al. 1982, pouzity korekcni faktor je 0.4 – stanoveno v listopadu 2022 [umol P/g DW]"
+mu,"Relativni rustova rychlost (1/hodina). Stanoveno pomoci analyzy dat rychlosti spotreby kysliku (oxitopy) po pridavku rustoveho media bez P (podrobnosti v Capek et al., 2016) "
+muMBC,MBC2 po tydnu od pridani rustoveho media bez P
+muMBN,MBN2 po tydnu od pridani rustoveho media bez P
+muMBP,MBP2 po tydnu od pridani rustoveho media bez P
+Navratnost,Navrtanost P-PO4 standardu o mnozstvi ~ 25 ug P/g DW – bezrozmerne
+PPadd,Mnozstvi pridaneho polyfosfatu [NaPO3]n [umol P/g DW]
+PiExcessNF,Narust mnozstvi SRP v NaHCO3 extaktu po pridavku polyfosfatu do nefumigovanych pudnich vzorku [umol P/g DW]
+PtotExcessNF,Narust mnozstvi P v NaHCO3 extaktu po pridavku polyfosfatu do nefumigovanych pudnich vzorku [umol P/g DW]
+PiExcessF,Narust mnozstvi SRP v NaHCO3 extaktu po pridavku polyfosfatu do fumigovanych pudnich vzorku [umol P/g DW]
+PtotExcessF,Narust mnozstvi P v NaHCO3 extaktu po pridavku polyfosfatu do fumigovanych pudnich vzorku [umol P/g DW]
+PiExcessNFExtract,Narust mnozstvi SRP v NaHCO3 extaktu po pridavku polyfosfatu do hotoveho extractu z nefumigovanych pudnich vzorku [umol P/L]
+PtotExcessNFExtract,Narust mnozstvi P v NaHCO3 extaktu po pridavku polyfosfatu do hotoveho extractu z nefumigovanych pudnich vzorku [umol P/L]
+PiExcessFExtract,Narust mnozstvi SRP v NaHCO3 extaktu po pridavku polyfosfatu do hotoveho extraktu z fumigovanych pudnich vzorku [umol P/L]
+PtotExcessFExtract,Narust mnozstvi P v NaHCO3 extaktu po pridavku polyfosfatu do hotoveho extraktu z fumigovanych pudnich vzorku [umol P/L]
+PPExtractNF,Narust mnozstvi P z PP v hotovem extraktu z nefumigovanych pudnich vzorku [umol P/L]
+PPExtractF,Narust mnozstvi P z PP v hotovem extraktu z fumigovanych pudnich vzorku [umol P/L]
+VmaxNF,Kineticky parametr Vmax odhadnuty pro fosfatazovou aktivitu v nefumigovanych pudnich vzorcich [umol P/g DW/h]
+KmNF,Kineticky parametr Km odhadnuty pro fosfatazovou aktivitu v nefumigovanych pudnich vzorcich [umol MUF-P/g DW]
+KiNF,Kineticky parametr Ki odhadnuty pro fosfatazovou aktivitu v nefumigovanych pudnich vzorcich inhibovanou substratem [umol MUF-P/g DW]
+VmaxF,Kineticky parametr Vmax odhadnuty pro fosfatazovou aktivitu ve fumigovanych pudnich vzorcich [umol P/g DW/h
+KmF,Kineticky parametr Km odhadnuty pro fosfatazovou aktivitu ve fumigovanych pudnich vzorcich [umol MUF-P/g DW]
+KiF,Kineticky parametr Ki odhadnuty pro fosfatazovou aktivitu ve fumigovanych pudnich vzorcich inhibovanou substratem [umol MUF-P/g DW]
