@@ -11,9 +11,11 @@ library(reshape)
 library(gridExtra)
 library(car)
 library(emmeans)
+library(magick)
+library(vegan)
 #==================================GGPLOT THEME
-#theme_min <- readRDS("/mnt/580CBE2464C5F83D/pracovni/helpfull_R_Matlab_script/ggtheme.rds")
-theme_min <- readRDS("ggtheme.rds")
+theme_min <- readRDS("/mnt/580CBE2464C5F83D/pracovni/helpfull_R_Matlab_script/ggtheme.rds")
+#theme_min <- readRDS("ggtheme.rds")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #=============================================================================================================#
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -21,8 +23,8 @@ theme_min <- readRDS("ggtheme.rds")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Reading all data~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PP <- read_ods("/mnt/580CBE2464C5F83D/pracovni/data_statistika/AdelMGR/MGRAdelData.ods", 2)
-PP <- read_ods("MGRAdelData.ods", 2)
+PP <- read_ods("/mnt/580CBE2464C5F83D/pracovni/data_statistika/AdelMGR/MGRAdelData.ods", 2)
+#PP <- read_ods("MGRAdelData.ods", 2)
 PP$muGompertz <- RustParametry$mumax
 PP$muL <- coef(RustParametryL)[, 3]
 PP$Horizont <- factor(PP$Horizont, levels = c("O", "A"))
@@ -163,13 +165,13 @@ grid.arrange(
     facet_grid(.~Horizont, labeller = as_labeller(facetLabs)) + theme_min + 
     scale_fill_manual(values = c("white", "grey")) +
     theme(legend.title = element_blank(), legend.position = c(0.8, 0.85), axis.title.x = element_blank()) +
-    scale_x_discrete(labels=c('Plešné', 'Čertovo')) + ylab(expression(paste(frac(C[Flush], P[Flush])~(mol/mol)))) +
+    scale_x_discrete(labels=c('Plešné', 'Čertovo')) + ylab(expression(paste((C:P)[CHCl[3]]~(mol/mol)))) +
     ggtitle("A)"),
   ggplot(PPGrowth, aes(Jezero, NFlush/PFlush)) + geom_boxplot(position = "dodge", aes(fill = Legend), show.legend = F) +
     facet_grid(.~Horizont, labeller = as_labeller(facetLabs)) + theme_min + 
     scale_fill_manual(values = c("white", "grey")) +
     theme(legend.title = element_blank(), legend.position = c(0.8, 0.9), axis.title.x = element_blank()) +
-    scale_x_discrete(labels=c('Plešné', 'Čertovo')) + ylab(expression(paste(frac(N[Flush], P[Flush])~(mol/mol)))) +
+    scale_x_discrete(labels=c('Plešné', 'Čertovo')) + ylab(expression(paste((N:P)[CHCl[3]]~(mol/mol)))) +
     ggtitle("B)"), ncol = 2
 )
 #Statistical test
@@ -247,7 +249,7 @@ grid.arrange(PP %>% group_by(Jezero, Plocha, Horizont) %>% summarise(y = mean(mu
                stat_smooth(method = "lm", se = F, aes(col = Horizont), show.legend = F) + 
                scale_color_manual(values = c("black", "grey"), labels = c("Litter Layer", "Organic Horizon")) + 
                scale_fill_manual(values = c("black", "grey"), labels = c("Litter Layer", "Organic Horizon")) + 
-               xlab(expression(paste(Initial~frac(C[Flush], P[Flush])~(mol/mol)))) +
+               xlab(expression(paste(Initial~(C:P)[CHCl[3]]~(mol/mol)))) +
                ylab(expression(paste(mu[P0]~(day^{-1})))) +
                geom_errorbar(aes(ymin = y - ySD, ymax = y + ySD)) + 
                annotate("text", x = 23.5, y = 0.7, label = "***Horizon", cex = 6) +
@@ -263,7 +265,7 @@ grid.arrange(PP %>% group_by(Jezero, Plocha, Horizont) %>% summarise(y = mean(mu
                stat_smooth(method = "lm", se = F, aes(col = Horizont), show.legend = F) + 
                scale_color_manual(values = c("black", "grey"), labels = c("Litter layer", "Organic horizon")) +
                scale_fill_manual(values = c("black", "grey"), labels = c("Litter layer", "Organic horizon")) + 
-               xlab(expression(paste(Initial~frac(N[Flush], P[Flush])~(mol/mol)))) +
+               xlab(expression(paste(Initial~(N:P)[CHCl[3]]~(mol/mol)))) +
                annotate("text", x = 3.35, y = 0.7, label = "***Horizon", cex = 6) +
                #annotate("text", x = 3.4, y = 0.74, parse = T, label = as.character(expression(paste("*",Initial~frac(N[Flush], P[Flush])))), cex= 6) +
                ylab(expression(paste(mu[P0]~(day^{-1})))) +
@@ -326,7 +328,7 @@ ggplot(mic_pca_out[-c(10, 12), ], aes(PC1, CPflush)) + geom_point(cex = 6, pch =
   scale_fill_manual(values = c("white", "grey")) +
   theme(legend.title = element_blank(), legend.position = c(0.8, 0.1)) +
   stat_smooth(method = lm, se = F, formula = y ~ x, color = "black") + 
-  ylab(expression(paste(frac(C, P)~of~CHCl[3], " Flush ", (frac(mol,mol))))) +
+  ylab(expression(paste((C:P)[CHCl[3]]~(mol/mol)))) +
   xlab("PCA 1 score") + 
   ggtitle("A)") + geom_point(data = mic_pca_out[c(10, 12), ],  aes(PC1, CPflush), cex = 4, pch = 21, fill = "black")
 ###N to P flush
@@ -335,7 +337,7 @@ ggplot(mic_pca_out[-c(10, 12), ], aes(PC1, NPflush)) + geom_point(cex = 6, pch =
   scale_fill_manual(values = c("white", "grey")) +
   theme(legend.title = element_blank(), legend.position = c(0.8, 0.1)) +
   stat_smooth(method = lm, se = F, formula = y ~ x, color = "black") + 
-  ylab(expression(paste(frac(N, P)~of~CHCl[3], " Flush ", (frac(mol,mol))))) +
+  ylab(expression(paste((N:P)[CHCl[3]]~(mol/mol)))) +
   xlab("PCA 1 score") + 
   ggtitle("B)") + geom_point(data = mic_pca_out[c(10, 12), ],  aes(PC1, NPflush), cex = 4, pch = 21, fill = "black")
 
@@ -345,14 +347,14 @@ summary(lm(NPflush ~ PC1, mic_pca_out[-c(10, 12), ]))
 anova(lm(CPflush ~ PC1, mic_pca_out[-c(10, 12), ]))
 anova(lm(NPflush ~ PC1, mic_pca_out[-c(10, 12), ]))
 
-#Composite figure - 4 to 12 inches landscape
+#Composite figure - 8 to 8 inches landscape
 grid.arrange(
   ggplot(mic_pca_out[-c(10, 12), ], aes(PC1, CPflush)) + geom_point(cex = 6, pch = 21, aes(fill = Legend)) + theme_min +
     facet_wrap(~Horizont, scales = "free_y", labeller = as_labeller(facetLabs)) + 
     scale_fill_manual(values = c("white", "grey")) +
     theme(legend.title = element_blank(), legend.position = c(0.85, 0.15)) +
     stat_smooth(method = lm, se = F, formula = y ~ x, color = "black") + 
-    ylab(expression(paste(frac(C, P)~of~CHCl[3], " Flush ", (frac(mol,mol))))) +
+    ylab(expression(paste((C:P)[CHCl[3]]~(mol/mol)))) +
     xlab("PCA 1 score") + 
     ggtitle("A)") + geom_point(data = mic_pca_out[c(10, 12), ],  aes(PC1, CPflush), cex = 4, pch = 21, fill = "black"),
   ggplot(mic_pca_out[-c(10, 12), ], aes(PC1, NPflush)) + geom_point(cex = 6, pch = 21, aes(fill = Legend), show.legend = F) + theme_min +
@@ -360,7 +362,7 @@ grid.arrange(
     scale_fill_manual(values = c("white", "grey")) +
     theme(legend.title = element_blank(), legend.position = c(0.8, 0.1)) +
     #stat_smooth(method = lm, se = F, formula = y ~ x, color = "black") + 
-    ylab(expression(paste(frac(N, P)~of~CHCl[3], " Flush ", (frac(mol,mol))))) +
+    ylab(expression(paste((N:P)[CHCl[3]]~(mol/mol)))) +
     xlab("PCA 1 score") + 
     ggtitle("B)") + geom_point(data = mic_pca_out[c(10, 12), ],  aes(PC1, NPflush), cex = 4, pch = 21, fill = "black"),
   ncol = 1
